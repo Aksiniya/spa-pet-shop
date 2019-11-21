@@ -8,15 +8,21 @@ Create SPA with three different data presentation options.
 
 ### API
 
-* GET /pets?limit&offset
-* POST /pets 
+#### api:
+
+* GET /api/pets?limit&offset
+* POST /api/pets
     - name
     - age
     - gender
     - species
-* GET /pets/:id
-* PUT /pets/:id
-* DELETE /pets/:id
+    - type
+* GET /api/pets/:id
+* DELETE /api/pets/:id
+
+#### user:
+
+* GET /pets
 
 ## How to use
 
@@ -40,6 +46,7 @@ Create SPA with three different data presentation options.
     > use pets
     ```
 5. Start server:
-```shell script
-node app/src/server.js
-```
+    ```shell script
+    node app/src/server.js
+    ```
+6. Go to `localhost:8000/`
