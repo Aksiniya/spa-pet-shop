@@ -4,7 +4,10 @@
   "description": "simple REST-API server",
   "main": "app/src/server.js",
   "scripts": {
-    "dev": "nodemon app/src/server.js"
+    "webpack-build": "webpack -p",
+    "dev": "nodemon app/src/server.js",
+    "start": "node app/src/server.js",
+    "webpack-devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8000 --host 0.0.0.0"
   },
   "author": "",
   "license": "ISC",
@@ -13,9 +16,22 @@
     "express": "^4.17.1",
     "mongodb": "^3.3.4",
     "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "nodemon": "^1.19.4",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }

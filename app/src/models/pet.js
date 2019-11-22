@@ -1,4 +1,4 @@
-const router_assistant = require('../routes/router_assistent');
+const router_assistant = require('../routes/router_assistant');
 const petModel = require('./petType');
 
 const petCollectionName = 'Pets';

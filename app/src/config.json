@@ -1,5 +1,6 @@
 {
   "mongodb": {
+    "name" : "pets",
     "uri" : "mongodb://localhost:27017/"
   }
 }

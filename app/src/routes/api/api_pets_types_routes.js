@@ -1,4 +1,4 @@
-const router_assistant = require('../router_assistent');
+const router_assistant = require('../router_assistant');
 const petTypeModel = require('../../models/petType');
 
 const petsTypesCollection = petTypeModel.petsTypesCollectionName;
@@ -30,8 +30,6 @@ module.exports = function (app, db) {
                 );
             }
         )
-
-
 
     });
 

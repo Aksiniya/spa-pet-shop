@@ -16,11 +16,11 @@ app.use(express.static('./app/public'));                           // run static
 
 MongoClient.connect(config.mongodb.uri, (err, client) => { // start mongo on config.mongodb.uri
     if (err) return console.log(err);
-    const db = client.db('pets');
-    require('./routes')(app, db);
+    const db = client.db(config.mongodb.name);
+    require('./routes/routes_entry')(app, db);
 
     app.listen(port, () => {
-        console.log('We are live on ' + port);
+        console.log('We are live on localhost:' + port);
     });
 
     // database.close();
