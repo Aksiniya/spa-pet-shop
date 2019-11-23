@@ -4,7 +4,7 @@
   "description": "simple REST-API server",
   "main": "app/src/server.js",
   "scripts": {
-    "webpack-build": "webpack -p",
+    "webpack-development": "webpack --watch --mode development",
     "dev": "nodemon app/src/server.js",
     "start": "node app/src/server.js",
     "webpack-devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8000 --host 0.0.0.0"
@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "less": "^3.10.3",
     "mongodb": "^3.3.4",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
@@ -28,6 +29,7 @@
     "babel": "^6.23.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "less-loader": "^5.0.0",
     "nodemon": "^1.19.4",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",

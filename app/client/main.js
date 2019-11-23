@@ -1,7 +1,9 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+import App from './components/App.jsx';
+
 ReactDOM.render(
-    <h1>main-file</h1>,
+    <App />,
     document.getElementById('mountPoint')
 );
