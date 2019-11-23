@@ -2,11 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "simple REST-API server",
-  "main": "app/src/server.js",
+  "main": "app/server/server.js",
   "scripts": {
     "webpack-development": "webpack --watch --mode development",
-    "dev": "nodemon app/src/server.js",
-    "start": "node app/src/server.js",
+    "dev": "nodemon app/server/server.js",
+    "start": "node app/server/server.js",
     "webpack-devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8000 --host 0.0.0.0"
   },
   "author": "",

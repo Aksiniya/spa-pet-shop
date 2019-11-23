@@ -67,7 +67,7 @@ There are two instances in database:
 │   │   ├── images                                  #
 │   │   ├── index.html                              #
 │   │   └── style.css                               #
-│   └── src                                         # -> Server-side code
+│   └── server                                      # -> Server-side code
 │       ├── config.json                             # Project configurations
 │       ├── models                                  # Database models 
 │       │   ├── pet.js                              #
@@ -108,7 +108,7 @@ There are two instances in database:
     ```
 5. Start server:
     ```shell script
-    $ node app/src/server.js
+    $ node app/server/server.js
     ```
     
     or: 
