@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.less';
+import TextLogo from "./app_styles/textLogo.jsx";
 import PetTypeGrid from "./main_page/PetTypeGrid.jsx";
 
 class App extends React.Component {
@@ -7,8 +8,7 @@ class App extends React.Component {
        return (
            <div className='application'>
                <div className='site-header'>
-                   <h1 className='logo-name'>Blue Paw</h1>
-                   <h2 className='pet-shop'>pet-shop</h2>
+                   <TextLogo />
                </div>
                <PetTypeGrid />
            </div>
