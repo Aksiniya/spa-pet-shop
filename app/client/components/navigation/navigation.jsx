@@ -1,15 +1,18 @@
 import React from 'react';
 import './navigation.less'
+import {NavLink} from "react-router-dom";
 
 class NavigationItem extends React.Component{
     render() {
         return (
-            <li
-                className={this.props.active == true ? 'navigation-item_selected' : ''}
-                onClick={this.props.onClick}
-            >
-                {this.props.name}
-            </li>
+            <NavLink to={this.props.link}>
+                <li
+                    className={this.props.active == true ? 'navigation-item_selected' : ''}
+                    onClick={this.props.onClick}
+                >
+                    {this.props.name}
+                </li>
+            </NavLink>
         )
     }
 }
@@ -18,7 +21,7 @@ class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            states: Array(props.itemsNames.length).fill(false)
+            states: Array(props.items.length).fill(false)
         }
     }
 
@@ -31,7 +34,8 @@ class Navigation extends React.Component {
     renderNavigationItem(index) {
         return (
             <NavigationItem
-                name={this.props.itemsNames[index]}
+                name={this.props.items[index].name}
+                link={this.props.items[index].path}
                 active={this.state.states[index]}
                 onClick={ () => this.clickHandle(index)}
                 key={index}
@@ -41,7 +45,7 @@ class Navigation extends React.Component {
 
     createItems() {
         let navigationItems = [];
-        for (let navigationItemIndex = 0; navigationItemIndex < this.props.itemsNames.length; navigationItemIndex++) {
+        for (let navigationItemIndex = 0; navigationItemIndex < this.props.items.length; navigationItemIndex++) {
             navigationItems.push(this.renderNavigationItem(navigationItemIndex));
         }
         return <ul>{navigationItems}</ul>;
@@ -55,6 +59,5 @@ class Navigation extends React.Component {
         );
     }
 }
-
 
 export default Navigation;

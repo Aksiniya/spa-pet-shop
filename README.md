@@ -2,9 +2,11 @@
 ## Task
 Create SPA with three different data presentation options.
 
+
 ## Solution
 ##### Node.js + Express + MongoDB + React
 
+[How to start this project](https://github.com/Aksiniya/spa-pet-shop/tree/dev#install)
 
 ### API
 
@@ -59,7 +61,7 @@ There are two instances in database:
 ├── README.md
 ├── app
 │   ├── client                                      # -> Client-side code
-│   │   ├── components                              # 
+│   │   ├── components                              # React components
 │   │   └── main.js                                 # Entry for webpack (for modules)
 │   ├── public                                      # Static public assets and uploads
 │   │   ├── build                                   # Distribution folder (/dist by default in webpack)
@@ -91,7 +93,7 @@ There are two instances in database:
 
 1. mongoDB
 2. node
-3. nmp
+3. npm
 
 ### Install
 
