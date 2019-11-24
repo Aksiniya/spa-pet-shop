@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.less';
 import TextLogo from "./app_styles/textLogo.jsx";
-import PetTypeGrid from "./main_page/PetTypeGrid.jsx";
+import NavDropdownExample from "./navigation/navigation.jsx";
 
 class App extends React.Component {
    render() {
@@ -10,7 +10,7 @@ class App extends React.Component {
                <div className='site-header'>
                    <TextLogo />
                </div>
-               <PetTypeGrid />
+               <NavDropdownExample itemsNames={['Home', 'Find my pet', 'Admin tools']} />
            </div>
        );
    }

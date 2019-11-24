@@ -1,6 +1,3 @@
-// const webpack = require('webpack');
-// const path = require('path');
-
 module.exports = {
     entry: __dirname + '/app/client/main.js',
     output: {
@@ -32,11 +29,6 @@ module.exports = {
                     },
                     {
                         loader: "css-loader",
-                        // options: {
-                        //     sourceMap: true,
-                        //     modules: true,
-                        //     localIdentName: "[local]___[hash:base64:5]"
-                        // }
                     },
                     {
                         loader: "less-loader"
