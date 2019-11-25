@@ -6,7 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import TextLogo from "./app_styles/textLogo.jsx";
 import Navigation from "./navigation/navigation.jsx";
 import Home from "./home/home.jsx";
-import Pets from "./pets/pets.jsx";
+import PetsLayout from "./pets/petsLayout.jsx";
 import CreationPanel from "./creationPanel/creationPanel.jsx";
 
 class SiteHeader extends React.Component {
@@ -22,7 +22,6 @@ class SiteHeader extends React.Component {
 class App extends React.Component {
     render() {
         return (
-            <BrowserRouter>
                 <div className='application'>
                     <SiteHeader />
                     <Navigation items={[
@@ -32,7 +31,7 @@ class App extends React.Component {
                         },
                         {
                             name: 'Find my pet',
-                            path: '/pets'
+                            path: '/pets?displayType=list'
                         },
                         {
                             name: 'Admin tools',
@@ -42,12 +41,13 @@ class App extends React.Component {
                     <main>
                         <Switch>
                             <Route exact path='/' component={Home} />
-                            <Route exact path='/pets' component={Pets}/>
-                            <Route exact path={'/create'} component={CreationPanel}/>
+                            <Route path='/pets' component={PetsLayout}/>
+                            <Route path='/create' component={CreationPanel}/>
+                            // TODO: default case for switch
+
                         </Switch>
                     </main>
                 </div>
-            </BrowserRouter>
         )
     }
 }

@@ -23,6 +23,7 @@ class Navigation extends React.Component {
         this.state = {
             states: Array(props.items.length).fill(false)
         }
+        this.state.states[0] = true;
     }
 
     clickHandle(index) {
