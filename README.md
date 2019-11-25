@@ -6,7 +6,36 @@ Create SPA with three different data presentation options.
 ## Solution
 ##### Node.js + Express + MongoDB + React
 
-[How to start this project](https://github.com/Aksiniya/spa-pet-shop/tree/dev#install)
+### Required
+
+1. mongoDB
+2. node
+3. npm
+
+
+### Install
+
+1. Clone this repository.
+2. Select repository: `$ cd repo`.
+3. Install dependencies:
+    ```shell script
+    $ npm i
+    ```
+4. You'll need MongoDB running for work. Start mongoDB in mongo shell and create DB `pets`.
+    ```shell script
+    $ mongo
+    > use pets
+    ```
+5. Start server:
+    ```shell script
+    $ npm run start
+    ```
+    or: 
+    ```shell script
+    $ node app/server/server.js
+    ```
+    
+6. Go to `localhost:8000/`
 
 ### API
 
@@ -86,35 +115,3 @@ There are two instances in database:
 ├── package.json
 └── webpack.config.js
 ```
-
-
-
-### Required
-
-1. mongoDB
-2. node
-3. npm
-
-### Install
-
-1. Clone this repository.
-2. Select repository: `$ cd repo`.
-3. Install dependencies:
-    ```shell script
-    $ npm i
-    ```
-4. You'll need MongoDB running for work. Start mongoDB in mongo shell and create DB `pets`.
-    ```shell script
-    $ mongo
-    > use pets
-    ```
-5. Start server:
-    ```shell script
-    $ node app/server/server.js
-    ```
-    
-    or: 
-    ```shell script
-    $ npm run start
-    ```
-6. Go to `localhost:8000/`
