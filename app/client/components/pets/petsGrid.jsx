@@ -1,6 +1,6 @@
 import React from 'react';
 
-class DisplayPets extends React.Component {
+class PetsGrid extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,4 +21,4 @@ class DisplayPets extends React.Component {
     }
 }
 
-export default DisplayPets;
+export default PetsGrid;

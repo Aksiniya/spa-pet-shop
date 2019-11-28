@@ -7,7 +7,7 @@ const morgan         = require('morgan');
 const config      = require('./config');
 const app            = express();
 
-const port = 8000;
+const port = config.port;
 
 app.use(favicon('./app/public/images/paw_favicon.png'));
 app.use(bodyParser.urlencoded({ extended: true }));

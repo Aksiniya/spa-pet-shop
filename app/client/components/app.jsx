@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.less';
 import {Route, Switch} from "react-router";
-import {BrowserRouter} from "react-router-dom";
 
 import TextLogo from "./app_styles/textLogo.jsx";
 import Navigation from "./navigation/navigation.jsx";
@@ -44,7 +43,6 @@ class App extends React.Component {
                             <Route path='/pets' component={PetsLayout}/>
                             <Route path='/create' component={CreationPanel}/>
                             // TODO: default case for switch
-
                         </Switch>
                     </main>
                 </div>
