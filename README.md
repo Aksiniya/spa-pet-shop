@@ -35,7 +35,7 @@ Create SPA with three different data presentation options.
     $ node app/server/server.js
     ```
     
-6. Go to `localhost:8000/`
+6. Go to `localhost:8080/`
 
 ### API
 

@@ -1,3 +1,4 @@
+import {EventEmitter} from 'events';
 import appDispatcher from '../dispatcher/appDispatcher';
 import constants from "../constants/constants";
 
@@ -14,53 +15,56 @@ function formatPet(data) {
         gender: data.gender,
         species: data.species,
         type: data.type,
-        id: data.id
+        id: data.petId
     }
 }
 
-const tasksStore = Object.assign({}, EventEmitter.prototype, {
+class tasksStore extends EventEmitter {
     isLoading() {
         return isLoading;
-    },
+    }
 
     getPets() {
         return pets;
-    },
+    }
 
     emitChange()  { // change data due for update data in component
         this.emit(CHANGE_EVENT);
-    },
+    }
 
     addChangeListener(callback) {
-        this.addEventListener(CHANGE_EVENT, callback);
-    },
+        this.on(CHANGE_EVENT, callback);
+    }
 
     removeChangeListener(callback) {
-        this.removeEventListener(CHANGE_EVENT, callback);
+        this.removeListener(CHANGE_EVENT, callback);
     }
-});
+}
+
+const taskStoreConst = new tasksStore();
 
 appDispatcher.register(function (action) {
-    switch (action) {
+    switch (action.type) {
         case constants.LOAD_PETS_REQUEST: {
             isLoading = true;
-            tasksStore.emitChange();
+            taskStoreConst.emitChange();
             break;
         }
 
         case constants.LOAD_PETS_SUCCESS: {
             isLoading = false;
-            pets = action.pets.map(formatPet());
+            pets = action.pets.map(formatPet);
+
             loadingError = false;
 
-            tasksStore.emitChange();
+            taskStoreConst.emitChange();
             break;
         }
 
         case constants.LOAD_PETS_FAIL: {
             loadingError = action.error;
 
-            tasksStore.emitChange();
+            taskStoreConst.emitChange();
             break;
         }
 
@@ -69,3 +73,5 @@ appDispatcher.register(function (action) {
         }
     }
 });
+
+export default taskStoreConst;

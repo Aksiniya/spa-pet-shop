@@ -1,7 +1,8 @@
 import React from 'react'
 import {Route, Switch} from "react-router";
+
 import Navigation from "../navigation/navigation.jsx";
-import PetsGrid from "./displayPets.jsx";
+import PetsGrid from "./petsGrid.jsx";
 
 class PetsLayout extends React.Component {
     render() {
@@ -27,12 +28,14 @@ class PetsLayout extends React.Component {
                         }
                     ]}
                 />
+                // TODO : search params
                 <main>
                     <Switch>
                         <Route
                             path={`${this.props.match.path}`}
-                            render={ (props) => <PetsGrid {...props.location}/> }
-                            />
+                            render={ props =>
+                                <PetsGrid {...props.location}/>
+                            }
                             // TODO: default case for switch
                         />
                     </Switch>

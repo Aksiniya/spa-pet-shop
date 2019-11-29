@@ -13,7 +13,7 @@ const petsActions = {
             .then(({ data }) =>
                 appDispatcher.dispatch({
                     type: constants.LOAD_PETS_SUCCESS,
-                    notes: data
+                    pets: data
                 })
             )
             .catch(err =>
