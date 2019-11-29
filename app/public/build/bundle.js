@@ -313,10 +313,10 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /*!********************************!*\
   !*** ./app/server/config.json ***!
   \********************************/
-/*! exports provided: apiPrefix, port, mongodb, default */
+/*! exports provided: apiPrefix, host, port, mongodb, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"apiPrefix\\\":\\\"http://localhost:8080/api\\\",\\\"port\\\":\\\"8080\\\",\\\"mongodb\\\":{\\\"name\\\":\\\"pets\\\",\\\"uri\\\":\\\"mongodb://localhost:27017/\\\"}}\");\n\n//# sourceURL=webpack:///./app/server/config.json?");
+eval("module.exports = JSON.parse(\"{\\\"apiPrefix\\\":\\\"http://localhost:8080/api\\\",\\\"host\\\":\\\"localhost\\\",\\\"port\\\":\\\"8080\\\",\\\"mongodb\\\":{\\\"name\\\":\\\"pets\\\",\\\"uri\\\":\\\"mongodb://localhost:27017/\\\"}}\");\n\n//# sourceURL=webpack:///./app/server/config.json?");
 
 /***/ }),
 

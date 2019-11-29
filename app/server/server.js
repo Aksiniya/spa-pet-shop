@@ -1,11 +1,11 @@
-const express        = require('express');
-const MongoClient    = require('mongodb').MongoClient;
-const bodyParser     = require('body-parser');
-const favicon        = require('serve-favicon');
-const morgan         = require('morgan');
+const express = require('express');
+const MongoClient = require('mongodb').MongoClient;
+const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
+const morgan = require('morgan');
 
-const config      = require('./config');
-const app            = express();
+const config = require('./config');
+const app = express();
 
 const port = config.port;
 

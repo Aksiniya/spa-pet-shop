@@ -1,12 +1,43 @@
 const router_assistant = require('../router_assistant');
 const petTypeModel = require('../../models/petType');
+const multer = require('multer');
+const fs = require('fs');
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './app/public/images/petsTypesIcons/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.body.type + file.originalname.match(/\.(\w)+$/)[0]);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/svg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+const upload = multer({storage: storage, limits: {
+        fileSize: 1024 * 1024 * 200
+    },
+    fileFilter: fileFilter
+});
+
+
+
 
 const petsTypesCollection = petTypeModel.petsTypesCollectionName;
 
 module.exports = function (app, db) {
 
-    app.post('/api/petsTypes', (req, res) => {
-        const petType = petTypeModel.createPetType(req.body);
+    app.post('/api/petsTypes', upload.single('petTypeIcon') , (req, res) => {
+        console.log(req.file);
+
+        let petType = petTypeModel.createPetType(req.body, req.body.type + req.file.originalname.match(/\.(\w)+$/)[0]);
 
         petTypeModel.petTypeIsCorrectPromise(petType, db, res).then(
             result => {
@@ -46,14 +77,14 @@ module.exports = function (app, db) {
     app.delete('/api/petsTypes', (req, res) => {
         const petType = req.query.petType;
 
-        db.collection(petsTypesCollection).findOne({'type' : petType}, (err, result) => {
+        db.collection(petsTypesCollection).findOne({'type' : petType}, (err, findResult) => {
             if (err) {
                 router_assistant.DatabaseError(err, res);
                 return;
             }
-            if (result == null) {
+            if (findResult == null) {
                 router_assistant.HttpError(404, "Can't delete pet type from database due to pet type with specified name not found.", res);
-            } else if ( result.count > 0) {
+            } else if ( findResult.count > 0) {
                 router_assistant.HttpError('400', 'Unable delete pet type cause pets with this type exists. Please delete all pets with this type from database before delete pet type.', res);
             } else {
                 db.collection(petsTypesCollection).deleteOne( {'type': petType}, (err, result) => {
@@ -63,6 +94,14 @@ module.exports = function (app, db) {
                     }
                     if ( result.deletedCount > 0) {
                         router_assistant.OK(`PetType "${petType}" was successfully deleted from database.`, res);
+
+                        const re = new RegExp( 'images/petsTypesIcons/' + findResult.type + '\.(\\w)+$');
+                        const filepath = './app/public/' + findResult.iconURL.match(re)[0];
+
+                        fs.unlink(filepath, (err) => {
+                            if (err) throw err;
+                        });
+
                     } else {
                         res.status(500);
                         res.send('Unknown error. Pet type has not been deleted.');
@@ -71,6 +110,4 @@ module.exports = function (app, db) {
             }
         });
     });
-
-
 };

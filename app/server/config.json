@@ -1,5 +1,6 @@
 {
   "apiPrefix" : "http://localhost:8080/api",
+  "host": "localhost",
   "port" : "8080",
   "mongodb": {
     "name" : "pets",
