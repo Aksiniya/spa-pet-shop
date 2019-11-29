@@ -1,4 +1,5 @@
 import React from 'react';
+import './pet.less'
 
 class Pet extends React.Component {
     constructor (props) {
@@ -9,17 +10,21 @@ class Pet extends React.Component {
             gender: props.gender,
             species: props.species,
             type: props.type,
-            id: props.id
+            id: props.id,
+
+            displayType: props.displayType
         }
     }
 
     render() {
         return (
-            <div>
-                {
-                    this.state.name
-                }
-            </div>
+            <ul className={'pet_'+this.state.displayType}>
+                <li>{this.state.type}</li>
+                <li>{this.state.species}</li>
+                <li>Age: {this.state.age} months</li>
+                <li>{this.state.gender}</li>
+                <li>{this.state.name}</li>
+            </ul>
         );
     }
 }

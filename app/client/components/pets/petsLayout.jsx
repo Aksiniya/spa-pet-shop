@@ -29,17 +29,15 @@ class PetsLayout extends React.Component {
                     ]}
                 />
                 // TODO : search params
-                <main>
-                    <Switch>
-                        <Route
-                            path={`${this.props.match.path}`}
-                            render={ props =>
-                                <PetsGrid {...props.location}/>
-                            }
-                            // TODO: default case for switch
-                        />
-                    </Switch>
-                </main>
+                <Switch>
+                    <Route
+                        path={`${this.props.match.path}`}
+                        render={ props =>
+                            <PetsGrid {...props.location}/>
+                        }
+                        // TODO: default case for switch
+                    />
+                </Switch>
             </div>
         )
     }

@@ -4,6 +4,8 @@ import Pet from "./pet.jsx";
 import petsStore from '../../flux_architecture/stores/petsStore';
 import petsActions from "../../flux_architecture/actions/petsActions";
 
+import './petsGrid.less';
+
 function getStateFromFlux() {
     return {
         isLoading: petsStore.isLoading(),
@@ -18,14 +20,11 @@ class PetsGrid extends React.Component {
 
         console.log('PetsGrid CONSTRUCTOR');
 
-        this.state = getStateFromFlux();
-        this.state.displayType = props.search;
-
-        this.onChange = this.onChange.bind(this);
-    }
-
-    componentWillMount() {
         petsActions.loadPets();
+
+        this.state = getStateFromFlux();
+        this.state.displayType = props.search.match(/(\w)+$/)[0];
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
@@ -44,10 +43,7 @@ class PetsGrid extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>
-                    {'Is ' + this.state.displayType}
-                </h1>
+            <div className={'petsGrid_' + this.state.displayType}>
                 {
                     this.state.pets.map( pet =>
                        <Pet
@@ -58,6 +54,8 @@ class PetsGrid extends React.Component {
                             species={pet.species}
                             type={pet.type}
                             id={pet.id}
+
+                            displayType={this.state.displayType}
                        />
                     )
                 }
