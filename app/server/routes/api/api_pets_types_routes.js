@@ -44,6 +44,22 @@ module.exports = function (app, db) {
         });
     });
 
+    app.get('/api/petsTypes/:petType', (req, res) => {
+        const petType = req.params.petType;
+
+        db.collection(petsTypesCollection).findOne({'type': petType}, (err, item) => {
+            if (err) {
+                router_assistant.DatabaseError(err, res);
+                return;
+            }
+            if (item == null) {
+                router_assistant.HttpError(404, 'PetType with specified typename not found.', res);
+                return;
+            }
+            res.send(item);
+        });
+    });
+
     app.delete('/api/petsTypes', (req, res) => {
         const petType = req.query.petType;
 
