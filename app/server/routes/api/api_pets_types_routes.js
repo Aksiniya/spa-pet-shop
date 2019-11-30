@@ -66,11 +66,15 @@ module.exports = function (app, db) {
                         router_assistant.OK(`PetType "${petType}" was successfully deleted from database.`, res);
 
                         const re = new RegExp( 'images/petsTypesIcons/' + findResult.type + '\.(\\w)+$');
-                        const filepath = './app/public/' + findResult.iconURL.match(re)[0];
+                        let filepath = findResult.iconURL.match(re)[0];
 
-                        fs.unlink(filepath, (err) => {
-                            if (err) throw err;
-                        });
+                        if (filepath !== 'images/petsTypesIcons/defaultPetTypeIcon.png') {
+                            filepath = './app/public/' + filepath;
+
+                            fs.unlink(filepath, (err) => {
+                                if (err) throw err;
+                            });
+                        }
 
                     } else {
                         res.status(500);

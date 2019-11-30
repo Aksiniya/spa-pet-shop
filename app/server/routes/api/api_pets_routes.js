@@ -101,10 +101,12 @@ module.exports = function (app, db) {
                         router_assistant.OK(`Pet with id=${petId} was successfully deleted from database.`, res);
 
                         let filepath = findResult.imageURL.match(/\/images\/petsImages\/.+$/)[0];
-                        filepath = './app/public' + filepath;
-                        fs.unlink(filepath, (err) => {
-                            if (err) throw err;
-                        });
+                        if (filepath !== '/images/petsImages/defaultPetImg.png') {
+                            filepath = './app/public' + filepath;
+                            fs.unlink(filepath, (err) => {
+                                if (err) throw err;
+                            });
+                        }
 
                     } else {
                         router_assistant.HttpError(404, "Can't delete pet from database due to pet with specified id not found", res);
