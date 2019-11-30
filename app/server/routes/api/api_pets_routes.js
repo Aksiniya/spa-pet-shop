@@ -1,12 +1,15 @@
 const router_assistant = require('../router_assistant');
 const petModel = require('../../models/pet');
 const petTypeModel = require('../../models/petType');
+const upload = require('./multer_assistant').upload;
+const fs = require('fs');
+
 const petsCollections = petModel.petsCollectionName;
 
 module.exports = function (app, db) {
 
-    app.post('/api/pets', (req, res) => {
-        const pet = petModel.createPet(req.body);
+    app.post('/api/pets', upload.single('petImage') ,(req, res) => {
+        const pet = petModel.createPet(req);
         petModel.petDataIsCorrectPromise(pet, db, res).then(
           isCorrect => {
               if ( isCorrect === false) return;
@@ -83,12 +86,12 @@ module.exports = function (app, db) {
             return;
         }
 
-        db.collection(petsCollections).findOne({'petId': petId}, (err, result) => {
+        db.collection(petsCollections).findOne({'petId': petId}, (err, findResult) => {
             if (err) {
                 router_assistant(err,res);
                 return;
             }
-            const type = result.type;
+            const type = findResult.type;
             db.collection(petsCollections).deleteOne({'petId' : petId}, (err, result) => {
                 if (err) {
                     router_assistant.DatabaseError(err, res);
@@ -96,6 +99,13 @@ module.exports = function (app, db) {
                     if ( result.deletedCount > 0) {
                         petTypeModel.decrementPetTypeCounterPromise(type, db);
                         router_assistant.OK(`Pet with id=${petId} was successfully deleted from database.`, res);
+
+                        let filepath = findResult.imageURL.match(/\/images\/petsImages\/.+$/)[0];
+                        filepath = './app/public' + filepath;
+                        fs.unlink(filepath, (err) => {
+                            if (err) throw err;
+                        });
+
                     } else {
                         router_assistant.HttpError(404, "Can't delete pet from database due to pet with specified id not found", res);
                     }

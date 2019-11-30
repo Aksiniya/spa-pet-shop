@@ -1,43 +1,14 @@
 const router_assistant = require('../router_assistant');
 const petTypeModel = require('../../models/petType');
-const multer = require('multer');
+const upload = require('./multer_assistant').upload;
 const fs = require('fs');
-
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './app/public/images/petsTypesIcons/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, req.body.type + file.originalname.match(/\.(\w)+$/)[0]);
-    }
-});
-
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/svg') {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-};
-
-const upload = multer({storage: storage, limits: {
-        fileSize: 1024 * 1024 * 200
-    },
-    fileFilter: fileFilter
-});
-
-
-
 
 const petsTypesCollection = petTypeModel.petsTypesCollectionName;
 
 module.exports = function (app, db) {
 
     app.post('/api/petsTypes', upload.single('petTypeIcon') , (req, res) => {
-        console.log(req.file);
-
-        let petType = petTypeModel.createPetType(req.body, req.body.type + req.file.originalname.match(/\.(\w)+$/)[0]);
+        let petType = petTypeModel.createPetType(req);
 
         petTypeModel.petTypeIsCorrectPromise(petType, db, res).then(
             result => {
@@ -61,7 +32,6 @@ module.exports = function (app, db) {
                 );
             }
         )
-
     });
 
     app.get('/api/petsTypes', (req, res) => {

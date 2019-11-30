@@ -2,12 +2,18 @@ const router_assistant = require('../routes/router_assistant');
 const petsTypesCollectionName = 'PetsTypes';
 const config = require('../config');
 
-function createPetType(data, iconFilename) {
+function createPetType(req) {
+    let iconUrl;
+    if (req.file !== undefined) {
+        iconUrl = `http://${config.host}:${config.port}/images/petsTypesIcons/${req.file.filename}`;
+    } else {
+        iconUrl = `http://${config.host}:${config.port}/images/petsTypesIcons/defaultPetTypeIcon.png`;
+    }
 
     return {
-        type : data.type,
+        type : req.body.type,
         count : 0,
-        iconURL: `http://${config.host}:${config.port}/images/petsTypesIcons/${iconFilename}`
+        iconURL: iconUrl
     }
 }
 
@@ -15,9 +21,6 @@ function petTypeIsCorrectPromise(petType, db, res) {
 
     if (petType.type === '' || petType.type === undefined ) {
         router_assistant.HttpError(400, 'Type field is empty.', res);
-        return false;
-    } else if (petType.iconURL === '' || petType.iconURL === undefined) {
-        router_assistant.HttpError(400, 'Icon url error.', res);
         return false;
     }
     return petTypeInDatabasePromise(petType, db).then(

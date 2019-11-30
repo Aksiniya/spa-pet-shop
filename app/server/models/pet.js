@@ -1,23 +1,32 @@
 const router_assistant = require('../routes/router_assistant');
 const petModel = require('./petType');
+const config = require('../config');
 
 const petCollectionName = 'Pets';
 
-function createPet(data) {
+
+function createPet(req) {
+    let imageUrl;
+    if (req.file !== undefined) {
+        imageUrl = `http://${config.host}:${config.port}/images/petsImages/${req.file.filename}`;
+    } else {
+        imageUrl = `http://${config.host}:${config.port}/images/petsImages/defaultPetImg.png`;
+    }
+    
     return{
-        name: data.name,
-        age: Number(data.age),
-        gender: data.gender,
-        species: data.species,
-        type: data.type,
-        petId: data.petId,
+        name: req.body.name,
+        age: Number(req.body.age),
+        gender: req.body.gender,
+        species: req.body.species,
+        type: req.body.type,
+        petId: req.body.petId,
+        imageURL: imageUrl
     };
 }
 
 function petDataIsCorrectPromise(pet, db, res) {
     if (res === undefined) {
         console.log(new Error('[ERROR]: Unable to send error message due to missing response reference.'));
-
     }
 
     if (pet.name === '' || pet.name === undefined ||
