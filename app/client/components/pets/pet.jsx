@@ -12,8 +12,6 @@ class Pet extends React.Component {
             age: props.pet.age,
             id: props.pet.id,
 
-            petTypeIconURL: props.petTypeIconURL,
-
             displayType: props.displayType
         }
     }
@@ -22,12 +20,18 @@ class Pet extends React.Component {
         switch (this.state.displayType) {
             case 'list': {
                 let listKeyIndex = 1;
+                let iconURL = this.props.petTypeIconURL;
+                if (this.props.petTypeIconURL === undefined) {
+                    iconURL = 'http://localhost:8080/images/petsTypesIcons/defaultPetTypeIcon.png'
+                }
+
                 return [
-                    <img key={'column_' + listKeyIndex++} src={ this.state.petTypeIconURL } alt={'Pet type icon'}/>,
-                    <span key={'column_' + listKeyIndex++}>{this.state.type}</span>,
+                    <span key={'column_' + listKeyIndex++}>
+                        <img src={ iconURL } alt={'Pet type icon'}/>
+                    </span>,
                     <span key={'column_' + listKeyIndex++}>{this.state.species}</span>,
                     <span key={'column_' + listKeyIndex++}>{this.state.gender}</span>,
-                    <span key={'column_' + listKeyIndex++}>Age: {this.state.age} months</span>,
+                    <span key={'column_' + listKeyIndex++}>{this.state.age}</span>,
                     <span key={'column_' + listKeyIndex++}>{this.state.name}</span>
                 ];
             }

@@ -76,28 +76,34 @@ class PetsGrid extends React.Component {
         this.setState(getStateFromFluxPetTypes());
     }
 
-    petsRender() {
-        console.log(this.state.petTypesIsLoading);
-        console.log(this.state.petTypesIconsDictionary);
-
-        return (
-            this.state.pets.map( pet =>
-                <Pet
-                    key={pet.id}
-                    pet={pet}
-                    petTypeIconURL={ this.state.petTypesIconsDictionary[pet.type] }
-                    tmp={this.state.petTypesIsLoading}
-                    displayType={this.state.displayType}
-                />
-            )
-        )
-    }
-
     render() {
+
+        function listHeader() {
+            if (this.state.displayType === 'list') {
+                let listKeyIndex = 0;
+                return ([
+                        <span key={'column_' + listKeyIndex++}>Pet type</span>,
+                        <span key={'column_' + listKeyIndex++}>Species</span>,
+                        <span key={'column_' + listKeyIndex++}>Gender</span>,
+                        <span key={'column_' + listKeyIndex++}>Age in month</span>,
+                        <span key={'column_' + listKeyIndex++}>Name</span>
+                    ]
+                )
+            }
+        }
+
         return (
             <div className={'petsGrid_' + this.state.displayType}>
+                {listHeader.bind(this)()}
                 {
-                    this.petsRender()
+                    this.state.pets.map( pet =>
+                        <Pet
+                            key={pet.id}
+                            pet={pet}
+                            petTypeIconURL={ this.state.petTypesIconsDictionary[pet.type] }
+                            displayType={ this.state.displayType }
+                        />
+                    )
                 }
             </div>
         );

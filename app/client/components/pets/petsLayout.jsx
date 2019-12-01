@@ -9,9 +9,6 @@ class PetsLayout extends React.Component {
         return (
             <div className={'pets-layout'}>
                 <h1>Pets</h1>
-                <span>
-                    The list of pets will be here soon.
-                </span>
                 <Navigation
                     items = {[
                         {
