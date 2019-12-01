@@ -39,10 +39,13 @@ class Pet extends React.Component {
                 return (
                     <ul className={'pet_'+this.state.displayType}>
                         <li>{this.state.type}</li>
+                        <li>
+                            <img src={this.props.pet.imageURL} alt={'Pet image'}/>
+                        </li>
                         <li>{this.state.species}</li>
-                        <li>{this.state.gender}</li>
+                        <li>Gender: {this.state.gender}</li>
                         <li>Age: {this.state.age} months</li>
-                        <li>{this.state.name}</li>
+                        <li>Name: {this.state.name}</li>
                     </ul>
                 );
             }

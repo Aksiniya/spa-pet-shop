@@ -15,7 +15,8 @@ function formatPet(data) {
         gender: data.gender,
         species: data.species,
         type: data.type,
-        id: data.petId
+        id: data.petId,
+        imageURL: data.imageURL
     }
 }
 
