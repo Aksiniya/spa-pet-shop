@@ -2,20 +2,17 @@ import {EventEmitter} from 'events';
 import appDispatcher from '../dispatcher/appDispatcher';
 import constants from "../constants/constants";
 
-let pets = [];
+let petTypes = [];
 let loadingError = null;
 let isLoading = true;
 
 const CHANGE_EVENT = 'change';
 
-function formatPet(data) {
+function formatPetType(data) {
     return {
-        name: data.name,
-        age: data.age,
-        gender: data.gender,
-        species: data.species,
-        type: data.type,
-        id: data.petId
+        typename: data.type,
+        count: data.count,
+        iconURL: data.iconURL
     }
 }
 
@@ -24,8 +21,8 @@ class tasksStore extends EventEmitter {
         return isLoading;
     }
 
-    getPets() {
-        return pets;
+    getPetsTypes() {
+        return petTypes;
     }
 
     emitChange()  { // change data due for update data in component
@@ -43,17 +40,19 @@ class tasksStore extends EventEmitter {
 
 const taskStoreConst = new tasksStore();
 
+
 appDispatcher.register(function (action) {
+    console.log(action.type)
     switch (action.type) {
-        case constants.LOAD_PETS_REQUEST: {
+        case constants.LOAD_PET_TYPES_REQUEST: {
             isLoading = true;
             taskStoreConst.emitChange();
             break;
         }
 
-        case constants.LOAD_PETS_SUCCESS: {
+        case constants.LOAD_PET_TYPES_SUCCESS: {
             isLoading = false;
-            pets = action.pets.map(formatPet);
+            petTypes = action.petTypes.map(formatPetType);
 
             loadingError = false;
 
@@ -61,7 +60,7 @@ appDispatcher.register(function (action) {
             break;
         }
 
-        case constants.LOAD_PETS_FAIL: {
+        case constants.LOAD_PET_TYPES_FAIL: {
             loadingError = action.error;
 
             taskStoreConst.emitChange();
