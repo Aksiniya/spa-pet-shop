@@ -42,7 +42,6 @@ const taskStoreConst = new tasksStore();
 
 
 appDispatcher.register(function (action) {
-    console.log(action.type)
     switch (action.type) {
         case constants.LOAD_PET_TYPES_REQUEST: {
             isLoading = true;

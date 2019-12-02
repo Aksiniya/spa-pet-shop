@@ -1,6 +1,5 @@
 import React from 'react';
-import './pet.less'
-
+import './pet.less';
 class Pet extends React.Component {
     constructor (props) {
         super(props);
@@ -36,6 +35,10 @@ class Pet extends React.Component {
                 ];
             }
             case 'cards': {
+                let image = this.props.pet.imageUR;
+                if (image === undefined) {
+                    image = 'http://localhost:8080/images/petsImages/defaultPetImg.png';
+                }
                 return (
                     <ul className={'pet_'+this.state.displayType}>
                         <li>{this.state.type}</li>
@@ -48,6 +51,18 @@ class Pet extends React.Component {
                         <li>Name: {this.state.name}</li>
                     </ul>
                 );
+            }
+            case 'groups': {
+                return (
+                    <ul className={'pet_'+this.state.displayType}>
+                        <li>Species: {this.state.species}</li>
+                        <li>Age: {this.state.age} month</li>
+                        <li>Gender: {this.state.gender}</li>
+                    </ul>
+                )
+            }
+            default: {
+                return null;
             }
         }
     }

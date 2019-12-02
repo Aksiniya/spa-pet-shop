@@ -67,12 +67,10 @@ class PetsGrid extends React.Component {
     }
 
     onChangePets() {
-        console.log('ONCHANGE PETS');
         this.setState(getStateFromFluxPets());
     }
 
     onChangePetTypes() {
-        console.log('ONCHANGE PET TYPES');
         this.setState(getStateFromFluxPetTypes());
     }
 
@@ -92,10 +90,9 @@ class PetsGrid extends React.Component {
             }
         }
 
-        return (
-            <div className={'petsGrid_' + this.state.displayType}>
-                {listHeader.bind(this)()}
-                {
+        function gridBody() {
+            if (this.state.displayType !== 'groups') {
+                return (
                     this.state.pets.map( pet =>
                         <Pet
                             key={pet.id}
@@ -104,7 +101,38 @@ class PetsGrid extends React.Component {
                             displayType={ this.state.displayType }
                         />
                     )
+                );
+            } else {
+                let petTypesBlocks = Object.assign({}, this.state.petTypesIconsDictionary);
+                for (let petType in petTypesBlocks) {
+                    petTypesBlocks[petType] = [];
                 }
+
+                this.state.pets.forEach( pet => {
+                    petTypesBlocks[pet.type].push(
+                        <Pet
+                            key={pet.id}
+                            pet={pet}
+                            displayType={ this.state.displayType }
+                        />
+                    );
+                });
+
+                return (
+                    Object.keys(petTypesBlocks).map(type =>
+                        <div key={type} className={'petsGrid_groups_group'}>
+                            <span>{type}</span>
+                            {petTypesBlocks[type]}
+                        </div>
+                    )
+                );
+            }
+        }
+
+        return (
+            <div className={'petsGrid_' + this.state.displayType}>
+                {listHeader.bind(this)()}
+                {gridBody.bind(this)()}
             </div>
         );
     }
