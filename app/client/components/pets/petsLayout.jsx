@@ -41,6 +41,7 @@ class PetsLayout extends React.Component {
 
         this.state = {
             sortBy: null,
+            searchValue: ''
         };
 
         petsActions.loadPets();
@@ -78,18 +79,43 @@ class PetsLayout extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.pets !== this.state.pets || prevState.sortBy !== this.state.sortBy) {
-            this.setState(prevState =>
-                this.state.pets.sort( (a, b) => {
+        function petsIsEqual(pets1, pets2) {
+            if (pets1.length !== pets2.length) return false;
+            for (let p in pets1) {
+                if (pets1.hasOwnProperty(p) !== pets2.hasOwnProperty(p)) return false;
+
+                if (typeof (pets1[p]) === 'object' && !petsIsEqual(pets1[p], pets2[p])) return false;
+
+                if (pets1[p] != pets2[p]) return false;
+            }
+            return true;
+        }
+
+        if ( !petsIsEqual(prevState.pets, this.state.pets) || prevState.sortBy !== this.state.sortBy) {
+
+            this.setState({pets: [].concat(this.state.pets).sort( (a, b) => {
                     let sortParam = this.state.sortBy;
                     if (sortParam === ' ') sortParam = null;
-                     return (a[sortParam] > b[sortParam]) ? 1 : ( (a[sortParam] === b[sortParam]) ? 0 : -1 );
+                    return (a[sortParam] > b[sortParam]) ? 1 : ( (a[sortParam] === b[sortParam]) ? 0 : -1 );
                 })
-            )
+            });
         }
     }
 
     render() {
+
+        let searchInputTimer = function tmp() {
+            let timeout = null;
+            let value = null;
+            return function (e) {
+                clearTimeout(timeout);
+                value =  e.target.value;
+                timeout = setTimeout(
+                    () => this.setState({searchValue: value}),
+                    700);
+            }.bind(this);
+        }.bind(this)();
+
         return (
             <div className={'pets-layout'}>
                 <Navigation
@@ -111,11 +137,13 @@ class PetsLayout extends React.Component {
 
                 <SearchParams
                     sortItems={[
-                        '-//-' ,'type', 'species', 'gender', 'age', 'name'
+                        '' ,'type', 'species', 'gender', 'age', 'name'
                     ]}
-                    onSelectSortItem={(event) => (
+                    onChangeSortItem={(event) =>
                         this.setState({sortBy: event.target.value})
-                    )}
+                    }
+
+                    onChangeSearchField={(event) => searchInputTimer(event)}
                 />
 
                 <Switch>
@@ -123,12 +151,12 @@ class PetsLayout extends React.Component {
                         path={`${this.props.match.path}`}
                         render={ props =>
                             <PetsGrid
-                                sortBy={this.state.sortBy}
+                                // sortBy={this.state.sortBy}
+                                searchValue={this.state.searchValue}
                                 displayType={this.props.location.search.match(/(\w)+$/)[0]}
                                 pets={this.state.pets}
                                 petTypesIconsDictionary={this.state.petTypesIconsDictionary}
                                 {...props.location}
-
                             />
                         }
                         // TODO: default case for switch

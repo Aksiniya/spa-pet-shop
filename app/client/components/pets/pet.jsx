@@ -25,13 +25,13 @@ class Pet extends React.Component {
                 }
 
                 return [
-                    <span key={'column_' + listKeyIndex++}>
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>
                         <img src={ iconURL } alt={'Pet type icon'}/>
                     </span>,
-                    <span key={'column_' + listKeyIndex++}>{this.state.species}</span>,
-                    <span key={'column_' + listKeyIndex++}>{this.state.gender}</span>,
-                    <span key={'column_' + listKeyIndex++}>{this.state.age}</span>,
-                    <span key={'column_' + listKeyIndex++}>{this.state.name}</span>
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.species}</span>,
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.gender}</span>,
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.age}</span>,
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.name}</span>
                 ];
             }
             case 'cards': {
@@ -40,7 +40,7 @@ class Pet extends React.Component {
                 //     image = 'http://localhost:8080/images/petsImages/defaultPetImg.png';
                 // }
                 return (
-                    <ul className={'pet_'+this.state.displayType}>
+                    <ul className={ `pet_${this.state.displayType} ${this.props.className}`}>
                         <li>{this.state.type}</li>
                         <li>
                             <img src={ this.props.pet.imageURL} alt={'Pet image'}/>
@@ -58,7 +58,7 @@ class Pet extends React.Component {
                 //     iconURL = 'http://localhost:8080/images/petsImages/defaultPetImg.png'
                 // }
                 return (
-                    <div className={'pet_'+this.state.displayType}>
+                    <div className={`pet_${this.state.displayType} ${this.props.className}`}>
                         <ul >
                             <li>Species: {this.state.species}</li>
                             <li>Age: {this.state.age} month</li>
