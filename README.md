@@ -27,7 +27,7 @@ Create SPA with three different data presentation options.
     
 5. Import test database in a new tab:
     ```
-    $ mongorestore -d rooms src/test/mongoDbTestData
+    $ mongorestore -d pets app/test/mongoDbTestData
     ```
 6. Start server:
     ```
