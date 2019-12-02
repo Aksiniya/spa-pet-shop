@@ -121,7 +121,7 @@ class PetsGrid extends React.Component {
                 return (
                     Object.keys(petTypesBlocks).map(type =>
                         <div key={type} className={'petsGrid_groups_group'}>
-                            <span>{type}</span>
+                            <span className={'petsGrid_groups_header'}>{type}</span>
                             {petTypesBlocks[type]}
                         </div>
                     )

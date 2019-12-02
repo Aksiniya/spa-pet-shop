@@ -35,15 +35,15 @@ class Pet extends React.Component {
                 ];
             }
             case 'cards': {
-                let image = this.props.pet.imageUR;
-                if (image === undefined) {
-                    image = 'http://localhost:8080/images/petsImages/defaultPetImg.png';
-                }
+                // let image = this.props.pet.imageURL;
+                // if (image === undefined) {
+                //     image = 'http://localhost:8080/images/petsImages/defaultPetImg.png';
+                // }
                 return (
                     <ul className={'pet_'+this.state.displayType}>
                         <li>{this.state.type}</li>
                         <li>
-                            <img src={this.props.pet.imageURL} alt={'Pet image'}/>
+                            <img src={ this.props.pet.imageURL} alt={'Pet image'}/>
                         </li>
                         <li>{this.state.species}</li>
                         <li>Gender: {this.state.gender}</li>
@@ -53,12 +53,19 @@ class Pet extends React.Component {
                 );
             }
             case 'groups': {
+                // let imageURL = this.props.pet.imageURL;
+                // if (this.props.pet.imageURL === undefined) {
+                //     iconURL = 'http://localhost:8080/images/petsImages/defaultPetImg.png'
+                // }
                 return (
-                    <ul className={'pet_'+this.state.displayType}>
-                        <li>Species: {this.state.species}</li>
-                        <li>Age: {this.state.age} month</li>
-                        <li>Gender: {this.state.gender}</li>
-                    </ul>
+                    <div className={'pet_'+this.state.displayType}>
+                        <ul >
+                            <li>Species: {this.state.species}</li>
+                            <li>Age: {this.state.age} month</li>
+                            <li>Gender: {this.state.gender}</li>
+                        </ul>
+                        <img src={this.props.pet.imageURL} alt={'Pet image'}/>
+                    </div>
                 )
             }
             default: {
