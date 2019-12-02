@@ -1,4 +1,5 @@
 import React from 'react';
+import './searchParams.less';
 
 class SearchParams extends React.Component {
 
@@ -18,7 +19,7 @@ class SearchParams extends React.Component {
 
     render() {
         return (
-            <ul>
+            <ul className={'searchParams_container'}>
                 <li>Sort by: {this.getSelect()}</li>
                 <li>Search: <input type='text' placeholder='filter' onChange={this.props.onChangeSearchField}/></li>
             </ul>
