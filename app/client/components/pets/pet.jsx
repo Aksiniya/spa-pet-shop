@@ -28,10 +28,10 @@ class Pet extends React.Component {
                     <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>
                         <img src={ iconURL } alt={'Pet type icon'}/>
                     </span>,
-                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.species}</span>,
-                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.gender}</span>,
-                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.age}</span>,
-                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.name}</span>
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.species} </span>,
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.gender} </span>,
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.age} </span>,
+                    <span key={'column_' + listKeyIndex++} className={`${this.props.className}`}>{this.state.name} </span>
                 ];
             }
             case 'cards': {
@@ -41,14 +41,14 @@ class Pet extends React.Component {
                 // }
                 return (
                     <ul className={ `pet_${this.state.displayType} ${this.props.className}`}>
-                        <li>{this.state.type}</li>
+                        <li>{this.state.type} </li>
                         <li>
                             <img src={ this.props.pet.imageURL} alt={'Pet image'}/>
                         </li>
                         <li>{this.state.species}</li>
-                        <li>Gender: {this.state.gender}</li>
-                        <li>Age: {this.state.age} months</li>
-                        <li>Name: {this.state.name}</li>
+                        <li>Gender: {this.state.gender} </li>
+                        <li>Age: {this.state.age} months </li>
+                        <li>Name: {this.state.name} </li>
                     </ul>
                 );
             }
@@ -57,10 +57,16 @@ class Pet extends React.Component {
                 // if (this.props.pet.imageURL === undefined) {
                 //     iconURL = 'http://localhost:8080/images/petsImages/defaultPetImg.png'
                 // }
+                let isDisplay = this.props.className ;
+                if (isDisplay !== '') {
+                    isDisplay = {display: 'none'};
+                } else {
+                    isDisplay = {}
+                }
                 return (
-                    <div className={`pet_${this.state.displayType} ${this.props.className}`}>
+                    <div className={`pet_${this.state.displayType}`} style={isDisplay}>
                         <ul >
-                            <li>Species: {this.state.species}</li>
+                            <li>Species: {this.state.species} </li>
                             <li>Age: {this.state.age} month</li>
                             <li>Gender: {this.state.gender}</li>
                         </ul>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from "react-router";
-import SearchParams from "../searchParams/searchParams.jsx";
+import SearchParams from "./searchMenu/searchParams.jsx";
 
 import Navigation from "../navigation/navigation.jsx";
 import PetsGrid from "./petsGrid.jsx";
