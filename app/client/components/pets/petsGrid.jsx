@@ -15,7 +15,7 @@ class PetsGrid extends React.Component {
         if (this.props.searchValue !== '') {
             let re = new RegExp(`${this.props.searchValue}`, 'i');
             for (let petParam in pet) {
-                if (pet[petParam].toString().match(re) !== null && petParam !== 'imageURL') {
+                if (pet[petParam].toString().match(re) !== null && petParam !== 'imageURL' && petParam !== 'id') {
                     petClass = '';
                     break
                 }
